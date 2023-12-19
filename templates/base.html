@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ershova Clara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        <div class="buttons">
+                <a href="/login">Войти</a>
+                <a href="/register">Зарегистрироваться</a>
+                <span class="username">{{username}}</span>
+        </div>
+        <div class="buttons">
+            <button>Добавить книгу</button>
+            <button>Редактировать книгу</button>
+            <button>Удалить книгу</button>
+            <a href="/logout">Выйти</a>
+        </div>
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+
+
+    <footer>
+        &copy; Ershova Clara, FBI-12, 3 course, 2023
+    </footer>
+</body>
+</html>
