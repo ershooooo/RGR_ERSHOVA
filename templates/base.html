@@ -8,17 +8,7 @@
 </head>
 <body>
     <header>
-        <div class="buttons">
-                <a href="/login">Войти</a>
-                <a href="/register">Зарегистрироваться</a>
-                <span class="username">{{username}}</span>
-        </div>
-        <div class="buttons">
-            <button>Добавить книгу</button>
-            <button>Редактировать книгу</button>
-            <button>Удалить книгу</button>
-            <a href="/logout">Выйти</a>
-        </div>
+        {% block header %}{% endblock %}
     </header>
 
     <main>
