@@ -62,7 +62,7 @@ def login():
         if check_password_hash(my_user.password, password_form):
             #Сохраняем JWT токен
             login_user(my_user,remember=False)
-            return redirect('/login')
+            return redirect('/main')
     return render_template('login.html',username=current_user.username)
 
 
@@ -107,3 +107,21 @@ def register():
     db.session.add(newUser)
     db.session.commit()
     return redirect('/login')
+
+
+
+@app.route('/main', methods=['POST', 'GET'])
+def main():
+    if request.method=='GET':
+        return render_template('main.html')
+
+    errors = ''
+    findname_form=request.form.get('findname')
+    findage_form=request.form.get('findage')
+
+
+
+@app.route('/page', methods=['POST', 'GET'])
+def page():
+    if request.method=='GET':
+        return render_template('page.html')
