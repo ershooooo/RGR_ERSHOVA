@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <div><img class="logo_photo" src="..\static\logo.png"></div>
+    <div class="logo_text">FIND ME</div>
+{% endblock %}
+
+{% block main %}
+    <form class="margin" method="POST">
+        <input class="input_1" type="text" name="username" placeholder="username" value="{{username}}">
+        <input  class="input_1" type="text" name="password" placeholder="password" value="{{password}}">
+        <input  class="input_1" type="text" name="password_2" placeholder="password" value="{{password_2}}">
+
+        <div><button class="input_1 button_1" type="submit">Зарегистрироваться</button></div>
+        <div class="label_input_1 error"><span>{{errors}}</span></div>
+    </form>
+{% endblock %}

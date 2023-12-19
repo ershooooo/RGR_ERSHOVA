@@ -66,6 +66,7 @@ def login():
     return render_template('login.html',username=current_user.username)
 
 
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method=='GET':
@@ -74,46 +75,35 @@ def register():
     errors = ''
     username_form=request.form.get('username')
     password_form=request.form.get('password')
+    password_2_form=request.form.get('password_2')
 
     #Ошибка: поля не заполнены
-    if username_form =='' or password_form == '':
+    if username_form =='' or password_form == '' or password_2_form == '':
         errors='Пожалуйста, заполните все поля'
-        return render_template('login.html',errors=errors,username=username_form,password=password_form)
+        return render_template('register.html',errors=errors,username=username_form,password=password_form,password_2=password_2_form)
 
-
-
-
-
-    '''Проверяем пользователя в БД с таким же именем
-    Если такого пользователя нет, то в isUserExist вернется None 
-    т.е. мы можем интерпретировать это как False'''
-
-    '''
-    select * from users
-    WHERE username=username_form
-    LIMIT 1 
-    --где username_form - это имя, которое мы получили из форм
-    '''
     #Проверка, что такой пользователь отсуствует 
     isUserExist = users.query.filter_by(username=username_form).first()
     if isUserExist is not None:
         errors='Пользователь с данным именем уже существует'
-        return render_template('register.html',errors=errors)
+        return render_template('register.html',errors=errors,password=password_form,password_2=password_2_form)
+
+    #Проверка, что пароль и подтверждение пароля совпадают
+    if password_form == password_2_form:
+        pass
+    else:
+        errors = 'Подтверждение пароля не совпадает'
+        return render_template('register.html',errors=errors,username=username_form)
 
     #Проверка, что пароль больше 5 символов
     if len(password_form) < 5:
         errors='Придумайте более сложный пароль'
-        return render_template('register.html',errors=errors)
-   
+        return render_template('register.html',errors=errors,username=username_form)
+
    #Хэшируем пароль
     hashedPswd = generate_password_hash(password_form, method='pbkdf2')
    #Создаем объект users с нужными полями 
     newUser = users(username=username_form,password=hashedPswd)
-
-   #INSERT
     db.session.add(newUser)
-   #conn.commit()
     db.session.commit()
-
-   #Перенаправление на страницу логина
     return redirect('/login')
