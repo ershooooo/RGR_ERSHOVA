@@ -8,21 +8,21 @@
 {% block main %}
     <form class="margin_2" method="POST">
         <div class="label_input_3">Анкета</div>
-        <input class="input_1" type="text" name="urname" placeholder="Имя" value="{{urname}}">
-        <input  class="input_1" type="number" name="urage" placeholder="Возраст" value="{{urage}}">
+        <input class="input_1" type="text" name="urname" placeholder="Имя" value="{{ form.name }}">
+        <input  class="input_1" type="number" name="urage" placeholder="Возраст" value="{{ form.age }}">
         <div class="label_input_2">Укажите ваш пол</div>
-        <p><select class="input_1" name="urmale">
+        <p><select class="input_1" name="urmale" value="{{ form.gender }}">
             <option value="female">Женский</option>
             <option value="male" selected>Мужской</option>
         </select> 
         <div class="label_input_2">Укажите пол человека, которого ищете</div>
-        <p><select class="input_1" name="urfindmale">
+        <p><select class="input_1" name="urfindmale" value="{{ form.search_gender}}">
             <option value="female" selected>Женский</option>
             <option value="male">Мужской</option>
         </select>
-        <input class="input_3" type="text" name="urinfo" placeholder="О себе" value="{{urinfo}}">
+        <input class="input_3" type="text" name="urinfo" placeholder="О себе" value="{{ form.about}}">
         <div class="label_input_2">Вставьте ссылку на вашу фотографию</div>
-        <input class="input_3" type="text" name="urphoto" placeholder="Фотография" value="{{urphoto}}">
+        <input class="input_3" type="text" name="urphoto" placeholder="Фотография" value="{{ form.photo}}">
         <div><button class="input_1 button_1" type="submit">Сохранить анкету</button></div>
         <div class="label_input_1 error"><span>{{errors}}</span></div>
     </form>

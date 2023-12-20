@@ -4,18 +4,20 @@
     <div><img class="logo_photo" src="..\static\logo.png"></div>
     <div class="logo_text">FIND ME</div>
 
-    <button class="button_add">Редактировать анкету</button>
+    <form class="margin_button_exist" action="/main/logout"><button class="button_1 button_exist">Выход</button></form>
+    <form class="margin_button_delete" action="/main/delete" method="POST"><button class="button_1  button_delete">Удалить профиль</button></form>
+    <form class="margin_button_hide"><button class="button_1 button_add">Спрятать анкету</button></form>
+    <form class="margin_button_add" action="/main/page_change"><button class="button_1 button_add">Редактировать анкету</button></form>
+    <div class="photo_1"><img src="..\static\person.png"></div>
+    <div class="label_input_1 margin_name">@{{username}}</div>
 {% endblock %}
 
 {% block main %}
-    
-    <button class="button_hide">Спрятать анкету</button>
-    <button class="button_delete">Удалить профиль</button>
-    <button class="button_exist">Выход</button>
-
-
-    <div><img src="..\static\person.png"></div>
-
-
-
+    <form method="POST">
+        <div class="findblock">
+            <input class="input_2" type="text" name="findname" placeholder="Имя" value="{{findname}}">
+            <input class="input_2" type="number" name="findage" placeholder="Возраст" value="{{findage}}">
+            <button class="button_2" type="submit">Поиск</button>
+        </div>
+    </form>
 {% endblock %}

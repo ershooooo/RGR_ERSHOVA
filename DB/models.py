@@ -19,12 +19,13 @@ class users(db.Model,UserMixin):
 
 class form(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    age = db.Column(db.Integer, nullable=False)
+    age = db.Column(db.Integer, nullable=False, default=0)
     gender = db.Column(db.String(10), nullable=False)
     search_gender = db.Column(db.String(10), nullable=False)
     about = db.Column(db.String(200))
-    photo = db.Column(db.String(100))
+    photo = db.Column(db.String(500))
 
-    def __repr__(self):
+    def repr(self):
         return f"Form('{self.name}', '{self.age}', '{self.gender}', '{self.search_gender}')"
