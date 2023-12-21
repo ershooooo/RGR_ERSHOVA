@@ -231,7 +231,7 @@ def search():
     else:
         profiles = form.query.filter(form.gender == find_gender).limit(3)
 
-    return render_template('main.html', profiles=profiles, username=current_user.username)
+    return render_template('main.html', profiles=profiles, username=current_user.username,findname=findname,findage=findage)
 
 
 @app.route('/loadmore', methods=['POST'])
@@ -260,6 +260,6 @@ def load_more_profiles():
         next_profiles = form.query.filter(form.id > last_displayed_profile_id,
                                           form.gender == find_gender).limit(3).all()
 
-    return render_template('main.html', profiles=next_profiles, username=current_user.username)
+    return render_template('main.html', profiles=next_profiles, username=current_user.username,findname=findname,findage=findage)
 
 
