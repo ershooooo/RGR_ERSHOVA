@@ -21,20 +21,24 @@
     </form>
 
     <div class="row">
-        {% for profile in profiles %}
-            <div class="col">
-                <div class="profile">
-                    <div><img class="photo_2" src="{{ profile.photo }}" alt="{{ profile.name }}'s photo"></div>
-                    <h3>{{ profile.name }}</h3>
-                    <p>Возраст: {{ profile.age }}</p>
-                    <p>О себе: {{ profile.about }}</p>
+        {% if profiles %}
+            {% for profile in profiles %}
+                <div class="col">
+                    <div class="profile">
+                        <div><img class="photo_2" src="{{ profile.photo }}" alt="{{ profile.name }}'s photo"></div>
+                        <h3>{{ profile.name }}</h3>
+                        <p>Возраст: {{ profile.age }}</p>
+                        <p>О себе: {{ profile.about }}</p>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p>No profiles found. Please try a different search.</p>
+        {% endif %}
     </div>
 
     <form id="loadMoreForm" class="margin_2" action="/loadmore" method="POST">
-        <input type="hidden" name="last_displayed_profile_id" value="{{ profiles[1].id if profiles else 0 }}">
+        <input type="hidden" name="last_displayed_profile_id" value="{{ profiles[0].id if profiles else 0 }}">
         <input type="hidden" name="findname" value="{{ findname }}">
         <input type="hidden" name="findage" value="{{ findage }}">
         <button class="input_1 button_1" type="submit">Показать еще</button>

@@ -206,3 +206,7 @@ footer {
     margin-bottom: 20px;
 }
 
+.photo_error{
+    width: 100px;
+    height: 100px;
+}
