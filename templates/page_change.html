@@ -11,14 +11,14 @@
         <input class="input_1" type="text" name="urname" placeholder="Имя" value="{{ form.name }}">
         <input  class="input_1" type="number" name="urage" placeholder="Возраст" value="{{ form.age }}">
         <div class="label_input_2">Укажите ваш пол</div>
-        <p><select class="input_1" name="urmale" value="{{ form.gender }}">
-            <option value="female">Женский</option>
-            <option value="male" selected>Мужской</option>
+        <select class="input_1" name="urmale">
+            <option value="female" {% if form.gender == 'female' %} selected {% endif %}>Женский</option>
+            <option value="male" {% if form.gender == 'male' %} selected {% endif %}>Мужской</option>
         </select> 
         <div class="label_input_2">Укажите пол человека, которого ищете</div>
-        <p><select class="input_1" name="urfindmale" value="{{ form.search_gender}}">
-            <option value="female" selected>Женский</option>
-            <option value="male">Мужской</option>
+        <select class="input_1" name="urfindmale">
+            <option value="female" {% if form.search_gender == 'female' %} selected {% endif %}>Женский</option>
+            <option value="male" {% if form.search_gender == 'male' %} selected {% endif %}>Мужской</option>
         </select>
         <input class="input_3" type="text" name="urinfo" placeholder="О себе" value="{{ form.about}}">
         <div class="label_input_2">Вставьте ссылку на вашу фотографию</div>

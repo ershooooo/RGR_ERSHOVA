@@ -13,11 +13,31 @@
 {% endblock %}
 
 {% block main %}
-    <form method="POST">
+    <form class="margin_2" id="searchForm" action="/search" method="POST">
         <div class="findblock">
-            <input class="input_2" type="text" name="findname" placeholder="Имя" value="{{findname}}">
-            <input class="input_2" type="number" name="findage" placeholder="Возраст" value="{{findage}}">
+            <input class="input_2" type="text" name="findname" placeholder="Имя" value="{{ findname }}">
+            <input class="input_2" type="number" name="findage" placeholder="Возраст" value="{{ findage }}">
             <button class="button_2" type="submit">Поиск</button>
         </div>
+    </form>
+
+    <div class="row">
+        {% for profile in profiles %}
+            <div class="col">
+                <div class="profile">
+                    <div><img class="photo_2" src="{{ profile.photo }}" alt="{{ profile.name }}'s photo"></div>
+                    <h3>{{ profile.name }}</h3>
+                    <p>Возраст: {{ profile.age }}</p>
+                    <p>О себе: {{ profile.about }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id="loadMoreForm" class="margin_2" action="/loadmore" method="POST">
+        <input type="hidden" name="last_displayed_profile_id" value="{{ profiles[1].id if profiles else 0 }}">
+        <input type="hidden" name="findname" value="{{ findname }}">
+        <input type="hidden" name="findage" value="{{ findage }}">
+        <button class="input_1 button_1" type="submit">Показать еще</button>
     </form>
 {% endblock %}

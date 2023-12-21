@@ -54,6 +54,7 @@ def login():
     if my_user is None:
         errors='Такой пользователь отсутствует'
         return render_template('login.html',errors=errors,username=username_form,password=password_form)
+
     #Ошибка неправильного пороля
     if not check_password_hash(my_user.password, password_form):
         errors = 'Введен неправильный пароль'
@@ -213,6 +214,52 @@ def page_change():
     db.session.commit()
     return redirect('/main')
 
-#Скрыть анкету
+#Поиск
+@app.route('/search', methods=['POST'])
+@login_required
+def search():
+    findname = request.form.get('findname')
+    findage = request.form.get('findage')
+    find_gender = form.query.filter_by(user_id=current_user.id).first().search_gender
+
+    if findname and findage:
+        profiles = form.query.filter(form.name.ilike(f"%{findname}%"), form.age == findage, form.gender == find_gender).limit(3)
+    elif findname:
+        profiles = form.query.filter(form.name.ilike(f"%{findname}%"), form.gender == find_gender).limit(3)
+    elif findage:
+        profiles = form.query.filter(form.age == findage, form.gender == find_gender).limit(3)
+    else:
+        profiles = form.query.filter(form.gender == find_gender).limit(3)
+
+    return render_template('main.html', profiles=profiles, username=current_user.username)
+
+
+@app.route('/loadmore', methods=['POST'])
+@login_required
+def load_more_profiles():
+    last_displayed_profile_id = request.form.get('last_displayed_profile_id')
+    findname = request.form.get('findname')
+    findage = request.form.get('findage')
+
+    find_gender = form.query.filter_by(user_id=current_user.id).first().search_gender
+
+    if findname and findage:
+        next_profiles = form.query.filter(form.id > last_displayed_profile_id,
+                                          form.name.ilike(f"%{findname}%"),
+                                          form.age == findage,
+                                          form.gender == find_gender).limit(3).all()
+    elif findname:
+        next_profiles = form.query.filter(form.id > last_displayed_profile_id,
+                                          form.name.ilike(f"%{findname}%"),
+                                          form.gender == find_gender).limit(3).all()
+    elif findage:
+        next_profiles = form.query.filter(form.id > last_displayed_profile_id,
+                                          form.age == findage,
+                                          form.gender == find_gender).limit(3).all()
+    else:
+        next_profiles = form.query.filter(form.id > last_displayed_profile_id,
+                                          form.gender == find_gender).limit(3).all()
+
+    return render_template('main.html', profiles=next_profiles, username=current_user.username)
 
 

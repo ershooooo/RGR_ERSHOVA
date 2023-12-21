@@ -28,4 +28,4 @@ class form(db.Model):
     photo = db.Column(db.String(500))
 
     def repr(self):
-        return f"Form('{self.name}', '{self.age}', '{self.gender}', '{self.search_gender}')"
+        return f"Form('{self.user_id}', '{self.name}', '{self.age}', '{self.gender}', '{self.search_gender}')"
