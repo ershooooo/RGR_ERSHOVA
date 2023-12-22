@@ -2,8 +2,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, Blueprint, render_template, request, make_response, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from Db import db
-from Db.models import users, form
+from db import db
+from db.models import users, form
 from flask_login import UserMixin
 from flask_login import login_user, login_required, current_user, logout_user
 
