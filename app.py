@@ -20,7 +20,7 @@ database_name = "ershtrub$ershova_rgz"
 password = "RHCPersh3947"
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mySQL://{user_db}:{password}@{host_ip}:{host_port}/{database_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://{user_db}:{password}@{host_ip}:{host_port}/{database_name}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 db.init_app(app)
 
